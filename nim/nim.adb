@@ -1,6 +1,5 @@
 with Interfaces; use Interfaces;
-with AVR.Real_Time.Delays; -- needed due to delay statement
--- with AVR.Strings; use AVR.Strings;
+with AVR.Real_Time.Delays;
 
 with LiquidCrystal; use LiquidCrystal;
 with Keypad; use Keypad;
