@@ -1,0 +1,4 @@
+project Nim extends "avr_app" is
+        for Main use ("nim.adb");
+end Nim;
+
