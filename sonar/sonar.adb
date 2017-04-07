@@ -62,6 +62,6 @@ begin
       for I in N+1 .. 16 loop
 	 LiquidCrystal.Put (' ');
       end loop;
-      delay 1.0;
+      delay 0.5;
    end loop;
 end Sonar;
