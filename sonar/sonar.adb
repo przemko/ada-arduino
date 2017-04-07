@@ -1,22 +1,17 @@
-with AVR.Real_Time.Delays;
-with AVR.Interrupts;
+with AVR.Real_Time.Delays; pragma Unrefered (AVR.Real_Time.Delays);
 with LiquidCrystal;
 
 with AVR; use AVR;
 with AVR.MCU;
 with AVR.Wait;
 
+with Handler; pragma Unrefered (Handler);
+
+with AVR.Timer1;
+
 procedure Sonar is
-   
-   Trigger    : Boolean renames MCU.PORTD_Bits (0);
-   Trigger_DD : Boolean renames MCU.DDRD_Bits  (0);
-   Echo_Pin   : Boolean renames MCU.PIND_Bits  (1);
-   Echo       : Boolean renames MCU.PORTD_Bits (1);
-   Echo_DD    : Boolean renames MCU.DDRD_Bits  (1);
-   
+  
    Processor_Speed : constant := 16_000_000;
-   
-   Counter, N : Natural;
    
    procedure Wait_2us is new AVR.Wait.Generic_Wait_USecs
      (Crystal_Hertz => Processor_Speed,
@@ -26,7 +21,20 @@ procedure Sonar is
      (Crystal_Hertz => Processor_Speed,
       Micro_Seconds => 10);
    
+   Trigger    : Boolean renames MCU.PORTD_Bits (0);
+   Trigger_DD : Boolean renames MCU.DDRD_Bits  (0);
+   Echo_Pin   : Boolean renames MCU.PIND_Bits  (1);
+   Echo       : Boolean renames MCU.PORTD_Bits (1);
+   Echo_DD    : Boolean renames MCU.DDRD_Bits  (1);
+   Counter    : Natural;
+   N          : Natural;
+   
 begin
+   --AVR.Timer1.Init_Normal (AVR.Timer1.Scale_by_1024);
+   --AVR.Timer1.Set_Overflow_At (10000);
+   --AVR.Timer1.Enable_Interrupt_Overflow;
+
+
    LiquidCrystal.Init (16, 2);
    LiquidCrystal.Clear;
    loop
@@ -55,13 +63,20 @@ begin
       LiquidCrystal.Put (Counter);
       LiquidCrystal.Put ("     ");
       LiquidCrystal.Set_Cursor (0, 1);
-      N := Counter / 2028;
-      for I in 1 .. N loop
-	 LiquidCrystal.Put (Character'Val (255));
-      end loop;
-      for I in N+1 .. 16 loop
-	 LiquidCrystal.Put (' ');
-      end loop;
+      if Counter >= 18000 then
+	LiquidCrystal.Put ("                ");
+      else
+	 N := (17999 - Counter) / 2000; 
+	 for I in 1 .. N loop
+	    LiquidCrystal.Put (Character'Val (255));
+	 end loop;
+	 for I in N+1 .. 16-N loop
+	    LiquidCrystal.Put (' ');
+	 end loop;
+	 for I in 17-N .. 16 loop
+	    LiquidCrystal.Put (Character'Val (255));
+	 end loop;
+      end if;
       delay 0.5;
    end loop;
 end Sonar;
