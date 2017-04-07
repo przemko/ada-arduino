@@ -1,0 +1,4 @@
+project Sonar extends "avr_app" is
+        for Main use ("sonar.adb");
+end Sonar;
+
