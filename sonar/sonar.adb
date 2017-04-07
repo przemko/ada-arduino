@@ -16,7 +16,7 @@ procedure Sonar is
    
    Processor_Speed : constant := 16_000_000;
    
-   Counter : Integer;
+   Counter : Natural;
    
    procedure Wait_2us is new AVR.Wait.Generic_Wait_USecs
      (Crystal_Hertz => Processor_Speed,
@@ -39,14 +39,15 @@ begin
       Echo_DD := DD_Input;
       Echo := Low;
       
-      Counter := 0;     
       while Echo_Pin = Low loop
-	 Counter := Counter + 1;
+	 null;
       end loop;
       while not Echo_Pin = High loop
-	 Counter := Counter + 1;
+	 null;
       end loop;
+      Counter := 0;
       while Echo_Pin = High loop
+	 exit when Counter = Integer'Last;
 	 Counter := Counter + 1;
       end loop;
       
