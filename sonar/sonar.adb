@@ -65,10 +65,10 @@ begin
       LiquidCrystal.Put (Counter);
       LiquidCrystal.Put ("     ");
       LiquidCrystal.Set_Cursor (0, 1);
-      if Counter >= 18000 then
+      if Counter >= 16000 then
 	LiquidCrystal.Put ("                ");
       else
-	 N := (17999 - Counter) / 2000; 
+	 N := 1 + (15999 - Counter) / 2000; 
 	 for I in 1 .. N loop
 	    LiquidCrystal.Put (Character'Val (255));
 	 end loop;
@@ -80,16 +80,14 @@ begin
 	 end loop;
       end if;
       case Counter is
-         when 0000..0999 => delay 0.05;
-         when 1000..1999 => delay 0.10;
-         when 2000..2999 => delay 0.15;
-         when 3000..3999 => delay 0.20;
-         when 4000..4999 => delay 0.25;
-         when 5000..5999 => delay 0.30;
-         when 6000..6999 => delay 0.35;
-         when 7000..7999 => delay 0.40;
-         when 8000..8999 => delay 0.45;
-         when 9000..9999 => delay 0.50;
+         when 00000..01999 => delay 0.05;
+         when 02000..03999 => delay 0.10;
+         when 04000..05999 => delay 0.15;
+         when 06000..07999 => delay 0.20;
+         when 08000..09999 => delay 0.25;
+         when 10000..11999 => delay 0.30;
+         when 12000..13999 => delay 0.35;
+         when 14000..15999 => delay 0.40;
          when others => delay 1.0;
       end case;
    end loop;
