@@ -16,7 +16,7 @@ procedure Sonar is
    
    Processor_Speed : constant := 16_000_000;
    
-   Counter : Natural;
+   Counter, N : Natural;
    
    procedure Wait_2us is new AVR.Wait.Generic_Wait_USecs
      (Crystal_Hertz => Processor_Speed,
@@ -54,6 +54,14 @@ begin
       LiquidCrystal.Set_Cursor (0, 0);
       LiquidCrystal.Put (Counter);
       LiquidCrystal.Put ("     ");
+      LiquidCrystal.Set_Cursor (0, 1);
+      N := Counter / 2028;
+      for I in 1 .. N loop
+	 LiquidCrystal.Put (Character'Val (255));
+      end loop;
+      for I in N+1 .. 16 loop
+	 LiquidCrystal.Put (' ');
+      end loop;
       delay 1.0;
    end loop;
 end Sonar;
