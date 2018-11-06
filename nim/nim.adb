@@ -113,6 +113,8 @@ procedure Nim is
       if N = 0 then
 	 Set_Cursor(0, 0);
 	 Put("I win! :)");
+	 Set_Cursor(0, 1);
+	 Put("Press RST button");
       end if;
    end Human_Move;
    
@@ -130,6 +132,8 @@ procedure Nim is
       if N = 0 then
 	 Set_Cursor(0, 0);
 	 Put("You won... :(");
+	 Set_Cursor(0, 1);
+	 Put("Press RST button");
       end if;
    end Computer_Move;
    
