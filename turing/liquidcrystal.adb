@@ -27,6 +27,7 @@ package body LiquidCrystal is
       Micro_Seconds => 2_000);
 
    procedure Init(Cols: in Byte; Lines: in Byte) is
+      pragma Unreferenced (Cols);
       use LiquidCrystal.Wiring;
    begin
 
