@@ -1,0 +1,4 @@
+project Turing extends "avr_app" is
+        for Main use ("turing.adb");
+end Turing;
+
