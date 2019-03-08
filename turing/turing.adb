@@ -14,10 +14,10 @@ procedure Turing is
       Put("press any key");
       Blink;
       loop
-	 exit when Key_Pressed;
+         exit when Key_Pressed;
       end loop;
       loop
-	 exit when not Key_Pressed;
+         exit when not Key_Pressed;
       end loop;
       No_Blink;
    end Wait_Until_Key_Pressed;
@@ -53,19 +53,19 @@ procedure Turing is
       Pos : Unsigned_8 := 0;
 
       procedure Print_Tape is
-	 I : Unsigned_8;
+         I : Unsigned_8;
       begin
-	 Set_Cursor(0, 0);
-	 I := Pos - 7;
-	 for K in 1 .. 7 loop
-	    Put (T (I));
-	    I := I + 1;
-	 end loop;
-	 Put ("|" & T (Pos .. Pos) & "|");
-	 for K in 1 .. 6 loop
-	    I := I + 1;
-	    Put (T (I));
-	 end loop;
+         Set_Cursor(0, 0);
+         I := Pos - 7;
+         for K in 1 .. 7 loop
+            Put (T (I));
+            I := I + 1;
+         end loop;
+         Put ("|" & T (Pos .. Pos) & "|");
+         for K in 1 .. 6 loop
+            I := I + 1;
+            Put (T (I));
+         end loop;
       end Print_Tape;
 
    begin
@@ -75,84 +75,84 @@ procedure Turing is
       Put ("  0:");
       loop
 
-	 if A not in M'Range then
-	    Put ("SEG-FAULT");
-	    Blink;
-	    exit;
-	 end if;
+         if A not in M'Range then
+            Put ("SEG-FAULT");
+            Blink;
+            exit;
+         end if;
 
-	 Set_Cursor (4, 1);
-	 case M(A).Command is
-	    when H0 => 
-	       Put ("H      ");
-	    when L0 =>
-	       Put ("L      ");
-	    when R0 =>
-	       Put ("R      ");
-	    when T1 =>
-	       Put ("T(");
-	       Put (Integer (M(A).Arg2));
-	       Put (")    ");
-	    when T2 =>
-	       Put ("T(");
-	       Put (M(A).Arg1);
-	       Put (",");
-	       Put (Integer (M(A).Arg2));
-	       Put (")  ");
-	    when W1 =>
-	       Put ("W(");
-	       Put (M(A).Arg1);
-	       Put (")    ");
-	 end case;
+         Set_Cursor (4, 1);
+         case M(A).Command is
+            when H0 =>
+               Put ("H      ");
+            when L0 =>
+               Put ("L      ");
+            when R0 =>
+               Put ("R      ");
+            when T1 =>
+               Put ("T(");
+               Put (Integer (M(A).Arg2));
+               Put (")    ");
+            when T2 =>
+               Put ("T(");
+               Put (M(A).Arg1);
+               Put (",");
+               Put (Integer (M(A).Arg2));
+               Put (")  ");
+            when W1 =>
+               Put ("W(");
+               Put (M(A).Arg1);
+               Put (")    ");
+         end case;
 
-	 delay D;
+         delay D;
 
-	 case M(A).Command is
-	    when H0 =>
-	       exit;
-	    when L0 =>
-	       Pos := Pos - 1;
-	       Print_Tape;
-	       A := A + 1;
-	    when R0 =>
-	       Pos := Pos + 1;
-	       Print_Tape;
-	       A := A + 1;
-	    when T1 =>
-	       A := M(A).Arg2;
-	    when T2 =>
-	       if M(A).Arg1 = T(Pos) then
-		  A := M(A).Arg2;
-	       else
-		  A := A + 1;
-	       end if;
-	    when W1 =>
-	       T (Pos) := M(A).Arg1;
-	       Set_Cursor (8, 0);
-	       Put (T (Pos));
-	       A := A + 1;
-	 end case;
-	 Set_Cursor (0, 1);
-	 if A < 100 then
-	    Put (' ');
-	    if A < 10 then
-	       Put (' ');
-	    end if;
-	 end if;
-	 Put (Integer (A));
-	 if Read_Key = Up_Button then
-	    if D > 0.01 then
-	       D := D * Duration (0.9);
-	    else
-	       D := 0.01;
-	    end if;
-	 elsif Read_Key = Down_Button then
-	    if D < 1.0 then
-	       D := D * Duration (1.1);
-	    else
-	       D := 1.0;
-	    end if;
-	 end if;
+         case M(A).Command is
+            when H0 =>
+               exit;
+            when L0 =>
+               Pos := Pos - 1;
+               Print_Tape;
+               A := A + 1;
+            when R0 =>
+               Pos := Pos + 1;
+               Print_Tape;
+               A := A + 1;
+            when T1 =>
+               A := M(A).Arg2;
+            when T2 =>
+               if M(A).Arg1 = T(Pos) then
+                  A := M(A).Arg2;
+               else
+                  A := A + 1;
+               end if;
+            when W1 =>
+               T (Pos) := M(A).Arg1;
+               Set_Cursor (8, 0);
+               Put (T (Pos));
+               A := A + 1;
+         end case;
+         Set_Cursor (0, 1);
+         if A < 100 then
+            Put (' ');
+            if A < 10 then
+               Put (' ');
+            end if;
+         end if;
+         Put (Integer (A));
+         if Read_Key = Up_Button then
+            if D > 0.01 then
+               D := D * Duration (0.9);
+            else
+               D := 0.01;
+            end if;
+         elsif Read_Key = Down_Button then
+            if D < 1.0 then
+               D := D * Duration (1.1);
+            else
+               D := 1.0;
+            end if;
+         end if;
       end loop;
    end Run;
 

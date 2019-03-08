@@ -63,9 +63,9 @@ package body LiquidCrystal is
       Data0 := False;
       
       case Lines is
-	 when 1 => null;
-	 when 2 => Display_Function := Display_Function or FLAG_2LINE;
-	 when others => null;
+         when 1 => null;
+         when 2 => Display_Function := Display_Function or FLAG_2LINE;
+         when others => null;
       end case;
       Command(FUNCTIONSET or Display_Function);
       
@@ -101,11 +101,11 @@ package body LiquidCrystal is
       Local_Row := Local_Row mod Num_Lines; -- ;)
       
       if Local_Row = 0 then
-	 Command(SETDDRAMADDR + Col);
+         Command(SETDDRAMADDR + Col);
       elsif Local_Row = 1 then
-	 Command(SETDDRAMADDR + 16#40# + Col);
+         Command(SETDDRAMADDR + 16#40# + Col);
       else
-	 null; -- !!! FIXME
+         null; -- !!! FIXME
       end if;
    end Set_Cursor;
    
@@ -183,7 +183,7 @@ package body LiquidCrystal is
    begin
       Command(SETCGRAMADDR or ((Location and 16#07#) * 8));
       for I in 0..7 loop
-	 Send(Char_Map(I), Is_Data => True);
+         Send(Char_Map(I), Is_Data => True);
       end loop;
    end Create_Char;
    
@@ -206,7 +206,7 @@ package body LiquidCrystal is
    procedure Put(S: in AVR_String) is
    begin
       for I in S'Range loop
-	 Put(S(I));
+         Put(S(I));
       end loop;
    end Put;
    
@@ -250,9 +250,9 @@ package body LiquidCrystal is
       Pulse_Enable;
       
       if Is_Data then
-	 Wait_1ms;
+         Wait_1ms;
       else
-	 Wait_10ms;
+         Wait_10ms;
       end if;
    end Send;
    

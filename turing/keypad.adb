@@ -15,12 +15,12 @@ package body Keypad is
    is
    begin
       case Convert_10bit(ADC_Channel) is
-	 when   0 ..  49 => return Right_Button;
-	 when  50 .. 249 => return Up_Button;
-	 when 250 .. 449 => return Down_Button;
-	 when 450 .. 649 => return Left_Button;
-	 when 650 .. 849 => return Select_Button;
-	 when others     => return None;
+         when   0 ..  49 => return Right_Button;
+         when  50 .. 249 => return Up_Button;
+         when 250 .. 449 => return Down_Button;
+         when 450 .. 649 => return Left_Button;
+         when 650 .. 849 => return Select_Button;
+         when others     => return None;
       end case;
    end Read_Key;
 
