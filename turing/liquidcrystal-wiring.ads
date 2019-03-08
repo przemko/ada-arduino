@@ -2,10 +2,10 @@ with AVR; use AVR;
 with AVR.MCU;
 
 private package LiquidCrystal.Wiring is
-   
+
    pragma Preelaborate;
-   
-   --  pin   id   port  bit  
+
+   --  pin   id   port  bit
    --==================================================
    --    0  PD0  PORTD    0  RXD   PCINT16       RX
    --    1  PD1  PORTD    1  TXD   PCINT17       TX
@@ -23,10 +23,10 @@ private package LiquidCrystal.Wiring is
    --   12  PB4  PORTB    4        PCINT4        MISO
    --   13  PB5  PORTB    5        PCINT5        SCK
    ----------------------------------------------------
-   
+
    -- Interface pins: 8, 9, 4, 5, 6, 7 :)
- 
-   Data0             : Boolean renames MCU.PORTD_Bits (4); 
+
+   Data0             : Boolean renames MCU.PORTD_Bits (4);
    Data1             : Boolean renames MCU.PORTD_Bits (5);
    Data2             : Boolean renames MCU.PORTD_Bits (6);
    Data3             : Boolean renames MCU.PORTD_Bits (7);
@@ -34,17 +34,17 @@ private package LiquidCrystal.Wiring is
    Data1_DD          : Boolean renames  MCU.DDRD_Bits (5);
    Data2_DD          : Boolean renames  MCU.DDRD_Bits (6);
    Data3_DD          : Boolean renames  MCU.DDRD_Bits (7);
-   
-   
+
+
    RegisterSelect    : Boolean renames MCU.PORTB_Bits (0);
    RegisterSelect_DD : Boolean renames MCU.DDRB_Bits (0);
-   
+
    ReadWrite         : Boolean renames MCU.PORTD_Bits (3);
    ReadWrite_DD      : Boolean renames MCU.DDRD_Bits (3);
-   
+
    Enable            : Boolean renames MCU.PORTB_Bits (1);
    Enable_DD         : Boolean renames MCU.DDRB_Bits (1);
-   
+
    Processor_Speed   : constant := 16_000_000;
-   
+
 end LiquidCrystal.Wiring;

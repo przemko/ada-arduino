@@ -20,13 +20,13 @@ with AVR; use AVR;
 with AVR.Strings; use AVR.Strings;
 
 package LiquidCrystal is
-   
+
    pragma Preelaborate;
-   
+
    subtype Byte is Unsigned_8;
-   
+
    type Bit_Map is array(0..7) of Byte;
-   
+
    -- Commands:
    CLEARDISPLAY   : constant Byte := 16#01#;
    RETURNHOME     : constant Byte := 16#02#;
@@ -36,7 +36,7 @@ package LiquidCrystal is
    FUNCTIONSET    : constant Byte := 16#20#;
    SETCGRAMADDR   : constant Byte := 16#40#;
    SETDDRAMADDR   : constant Byte := 16#80#;
-   
+
    -- Flags:
    ---- for display entry mode
    FLAG_ENTRYLEFT           : constant Byte := 16#02#;
@@ -52,7 +52,7 @@ package LiquidCrystal is
    FLAG_8BITMODE            : constant Byte := 16#10#;
    FLAG_2LINE               : constant Byte := 16#08#;
    FLAG_5x10DOTS            : constant Byte := 16#04#;
-   
+
    -- high level procedures:
    procedure Init(Cols: in Byte; Lines: in Byte);
    procedure Clear;
@@ -74,22 +74,22 @@ package LiquidCrystal is
    procedure Put(C: in Character);
    procedure Put(S: in AVR_String);
    procedure Put(I: in Integer);
-   
+
    -- mid level procedures:
    procedure Command(Value: in Byte);
    procedure Write(Value: in Byte);
-   
+
 private
    pragma Inline(Command);
    pragma Inline(Write);
-   
+
    Display_Function : Byte := 16#00#;
    Display_Control  : Byte := 16#00#;
    Display_Mode     : Byte := 16#00#;
    Num_Lines        : Byte;
-   
+
    -- low level procedures:
    procedure Send(Value: in Byte; Is_Data: in Boolean);
    procedure Pulse_Enable;
-   
+
 end LiquidCrystal;

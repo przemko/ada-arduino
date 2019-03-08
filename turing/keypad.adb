@@ -2,16 +2,16 @@ with Interfaces; use Interfaces;
 with AVR.ADC; use AVR.ADC;
 
 package body Keypad is
-   
+
    ADC_Channel : constant ADC_Channel_T := 0;
-   
+
    function Key_Pressed return Boolean
    is
    begin
       return Convert_10bit(ADC_Channel) < 1000;
    end Key_Pressed;
-   
-   function Read_Key return Button 
+
+   function Read_Key return Button
    is
    begin
       case Convert_10bit(ADC_Channel) is
@@ -25,6 +25,6 @@ package body Keypad is
    end Read_Key;
 
 begin
-  Init(Scale_By_128, Is_Vcc);
+   Init(Scale_By_128, Is_Vcc);
 end Keypad;
 
